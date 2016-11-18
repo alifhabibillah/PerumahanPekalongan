@@ -10,8 +10,10 @@ import com.alif.perumahanpekalongan.SelatanFragment;
 import com.alif.perumahanpekalongan.TimurFragment;
 import com.alif.perumahanpekalongan.UtaraFragment;
 
+import org.w3c.dom.Text;
+
 /**
- * Created by Alif on 15/11/2016.
+ * Created by Alif Habibillah.
  */
 
 public class InfoFragmentPagerAdapter extends FragmentPagerAdapter {
