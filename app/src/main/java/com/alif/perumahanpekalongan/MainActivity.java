@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().hide();
+
         ImageButton btn_info = (ImageButton) findViewById(R.id.btn_info);
 
         btn_info.setOnClickListener(new View.OnClickListener() {

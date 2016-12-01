@@ -10,15 +10,24 @@
     android:orientation="vertical"
     tools:context="com.alif.perumahanpekalongan.MainActivity">
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_weight="3.5"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerInside" />
     <ImageButton
         android:id="@+id/btn_cari"
         android:layout_width="300dp"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/btn_cari"
         android:background="#009688"
-        android:scaleType="centerInside" />
+        android:scaleType="fitCenter" />
     <ImageButton
         android:id="@+id/btn_info"
         android:layout_width="300dp"
@@ -26,8 +35,9 @@
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:src="@drawable/btn_info"
         android:background="#009688"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitCenter"/>
     <ImageButton
         android:id="@+id/btn_tentang"
         android:layout_width="300dp"
@@ -35,12 +45,13 @@
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:src="@drawable/btn_tentang"
         android:background="#009688"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitCenter"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="\u00A9 Alif Habibillah 2016"
         android:textAlignment="center"
         android:textSize="14sp"
