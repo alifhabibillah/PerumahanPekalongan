@@ -1,5 +1,6 @@
 package com.alif.perumahanpekalongan;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import okhttp3.Response;
 
 public class BaratFragment extends Fragment {
 
+    private Context context;
+
     private CardAdapter adapter;
     private List<MyData> dataList;
 
@@ -50,7 +53,7 @@ public class BaratFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         dataList = new ArrayList<>();
-        load_data("Pekalongan Selatan");
+        load_data("Pekalongan Barat");
 
         adapter = new CardAdapter(getActivity(), dataList);
         recyclerView.setAdapter(adapter);
@@ -64,7 +67,7 @@ public class BaratFragment extends Fragment {
             protected Void doInBackground(String... params) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://192.168.43.192/perumahan/read.php?kecamatan='"+kecamatan+"'")
+                        .url("http://192.168.43.192/perumahan/info.php?kecamatan="+kecamatan)
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
@@ -74,8 +77,8 @@ public class BaratFragment extends Fragment {
                     for (int i=0; i<array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
 
-                        MyData data = new MyData(object.getString("nmperum"),
-                                object.getString("kelurahan"), object.getString("kecamatan"));
+                        MyData data = new MyData(object.getString("kdperum"), object.getString("nmperum"),
+                                object.getString("kelurahan"), object.getString("kecamatan"), object.getString("detail"), object.getString("foto"));
 
                         dataList.add(data);
                     }

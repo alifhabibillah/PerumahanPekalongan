@@ -8,7 +8,8 @@
         android:id="@+id/foto_perum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5" />
+        android:layout_weight="1.5"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/text_perum"
@@ -23,6 +24,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/text_kelurahan"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
@@ -34,6 +36,7 @@
         android:textColor="#FFFFFF" />
 
     <TextView
+        android:id="@+id/text_kecamatan"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
@@ -44,29 +47,14 @@
         android:textSize="16sp"
         android:textColor="#FFFFFF" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/layout_border" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/layout_border"/>
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/detail_perum"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2" />
+        android:layout_weight="2"
+        android:padding="10dp"
+        android:text="Detail Perumahan"
+        android:textSize="16sp"
+        android:maxLines="15" />
 
 </LinearLayout>

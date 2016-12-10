@@ -10,8 +10,6 @@ import com.alif.perumahanpekalongan.SelatanFragment;
 import com.alif.perumahanpekalongan.TimurFragment;
 import com.alif.perumahanpekalongan.UtaraFragment;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by Alif Habibillah.
  */
