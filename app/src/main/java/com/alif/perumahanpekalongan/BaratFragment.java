@@ -1,6 +1,8 @@
 package com.alif.perumahanpekalongan;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -28,9 +30,7 @@ import okhttp3.Response;
  * Created by Alif on 15/11/2016.
  */
 
-public class BaratFragment extends Fragment {
-
-    private Context context;
+public class BaratFragment extends Fragment implements CardAdapter.ClickListener {
 
     private CardAdapter adapter;
     private List<MyData> dataList;
@@ -56,6 +56,7 @@ public class BaratFragment extends Fragment {
         load_data("Pekalongan Barat");
 
         adapter = new CardAdapter(getActivity(), dataList);
+        adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
         return rootView;
@@ -98,5 +99,10 @@ public class BaratFragment extends Fragment {
         };
 
         task.execute(kecamatan);
+    }
+
+    @Override
+    public void itemClicked(View v, int position) {
+        //startActivity(new Intent(getActivity(), DetailActivity.class));
     }
 }
