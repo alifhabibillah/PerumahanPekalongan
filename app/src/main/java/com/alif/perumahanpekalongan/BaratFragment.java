@@ -1,8 +1,5 @@
 package com.alif.perumahanpekalongan;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
