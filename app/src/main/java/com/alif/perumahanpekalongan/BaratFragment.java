@@ -1,5 +1,6 @@
 package com.alif.perumahanpekalongan;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -100,6 +101,10 @@ public class BaratFragment extends Fragment implements CardAdapter.ClickListener
 
     @Override
     public void itemClicked(View v, int position) {
-        //startActivity(new Intent(getActivity(), DetailActivity.class));
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Detail", dataList.get(position));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
