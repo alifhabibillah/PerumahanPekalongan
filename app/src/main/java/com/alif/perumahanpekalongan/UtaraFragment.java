@@ -42,7 +42,7 @@ public class UtaraFragment extends Fragment implements CardAdapter.ClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_utara, container, false);
         // menampilkan recyclerview yang ada pada file layout dengan id listUtara
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.listUtara);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.list_utara);
         // menset ukuran
         recyclerView.setHasFixedSize(true);
 

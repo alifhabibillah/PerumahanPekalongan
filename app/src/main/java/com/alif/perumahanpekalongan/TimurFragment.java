@@ -42,7 +42,7 @@ public class TimurFragment extends Fragment implements CardAdapter.ClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_timur, container, false);
         // menampilkan recyclerview yang ada pada file layout dengan id listTimur
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.listTimur);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.list_timur);
         // menset ukuran
         recyclerView.setHasFixedSize(true);
 

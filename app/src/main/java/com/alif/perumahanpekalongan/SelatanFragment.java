@@ -42,7 +42,7 @@ public class SelatanFragment extends Fragment implements CardAdapter.ClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_selatan, container, false);
         // menampilkan recyclerview yang ada pada file layout dengan id listSelatan
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.listSelatan);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.list_selatan);
         // menset ukuran
         recyclerView.setHasFixedSize(true);
 

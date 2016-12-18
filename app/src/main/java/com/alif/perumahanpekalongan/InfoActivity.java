@@ -19,7 +19,7 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         InfoFragmentPagerAdapter pagerAdapter = new InfoFragmentPagerAdapter(getSupportFragmentManager(), InfoActivity.this);
         viewPager.setAdapter(pagerAdapter);
 

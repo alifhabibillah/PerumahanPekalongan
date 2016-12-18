@@ -19,7 +19,7 @@
         android:src="@drawable/logo"
         android:scaleType="centerInside" />
     <ImageButton
-        android:id="@+id/btn_cari"
+        android:id="@+id/img_btn_cari"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -29,7 +29,7 @@
         android:background="#009688"
         android:scaleType="fitCenter" />
     <ImageButton
-        android:id="@+id/btn_info"
+        android:id="@+id/img_btn_info"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -39,7 +39,7 @@
         android:background="#009688"
         android:scaleType="fitCenter"/>
     <ImageButton
-        android:id="@+id/btn_tentang"
+        android:id="@+id/img_btn_tentang"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="\u00A9 Alif Habibillah 2016"
+        android:text="Alif Habibillah \u00A9 2016"
         android:textAlignment="center"
         android:textSize="14sp"
         android:textStyle="bold"/>
