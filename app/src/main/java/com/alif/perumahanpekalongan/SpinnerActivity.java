@@ -1,12 +1,15 @@
 package com.alif.perumahanpekalongan;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,9 +19,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,26 +33,43 @@ public class SpinnerActivity extends AppCompatActivity {
 
     public TextView perum_pilih;
     private Spinner spinnerJalan, spinnerBlok, spinnerRumah;
-    private List<MyKoord> myKoordList;
     List<String> labelJalan = new ArrayList<String>();
     List<String> labelBlok = new ArrayList<String>();
+    List<String> labelRumah = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spinner);
 
-        MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail Cari");
+        final MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail Cari");
 
         perum_pilih = (TextView) findViewById(R.id.perum_pilih);
         perum_pilih.setText(myData.getNmperum());
 
-        myKoordList = new ArrayList<>();
-        load_jalan(myData.getKdperum());
-
         spinnerJalan = (Spinner) findViewById(R.id.spin_jalan);
         spinnerBlok = (Spinner) findViewById(R.id.spin_blok);
         spinnerRumah = (Spinner) findViewById(R.id.spin_rumah);
+
+        load_jalan(myData.getKdperum());
+
+        Button btn_cari = (Button) findViewById(R.id.btn_cari);
+
+        btn_cari.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String kdPerum = myData.getKdperum();
+                String nmJalan = spinnerJalan.getSelectedItem().toString();
+                String bLok    = spinnerBlok.getSelectedItem().toString();
+                String noRumah = spinnerRumah.getSelectedItem().toString();
+                Intent map_intent = new Intent(SpinnerActivity.this, MapsActivity.class);
+                map_intent.putExtra("Kdperum", kdPerum);
+                map_intent.putExtra("Nmjalan", nmJalan);
+                map_intent.putExtra("Blok", bLok);
+                map_intent.putExtra("Norumah", noRumah);
+                startActivity(map_intent);
+            }
+        });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -72,13 +90,10 @@ public class SpinnerActivity extends AppCompatActivity {
                     for (int i=0; i<array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
 
-                        MyKoord data = new MyKoord(object.getString("kdkoord"), object.getString("kdperum"),
-                                object.getString("nmjalan"), object.getString("blok"), object.getString("norumah"), object.getDouble("latitude"),
-                                object.getDouble("longitude"));
-
-                        myKoordList.add(data);
-
-                        labelJalan.add(myKoordList.get(i).getNmjalan());
+                        if (!labelJalan.contains(object.getString("nmjalan"))) {
+                            Log.i("nmjalan", object.getString("nmjalan"));
+                            labelJalan.add(object.getString("nmjalan"));
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -90,17 +105,17 @@ public class SpinnerActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                //super.onPostExecute(aVoid);
+                super.onPostExecute(aVoid);
                 final ArrayAdapter<String> jalanAdapter = new ArrayAdapter<String>(SpinnerActivity.this, android.R.layout.simple_dropdown_item_1line, labelJalan);
                 spinnerJalan.setAdapter(jalanAdapter);
                 spinnerJalan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail Cari");
-                        String selectedValue = parent.getSelectedItem().toString();
 
                         labelBlok.clear();
-                        load_blok(myData.getKdperum(),selectedValue);
+                        load_blok(myData.getKdperum(),parent.getSelectedItem().toString());
+                        jalanAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -129,13 +144,10 @@ public class SpinnerActivity extends AppCompatActivity {
                     for (int i=0; i<array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
 
-                        MyKoord data = new MyKoord(object.getString("kdkoord"), object.getString("kdperum"),
-                                object.getString("nmjalan"), object.getString("blok"), object.getString("norumah"), object.getDouble("latitude"),
-                                object.getDouble("longitude"));
-
-                        myKoordList.add(data);
-
-                        labelBlok.add(myKoordList.get(i).getBlok());
+                        if (!labelBlok.contains(object.getString("blok"))) {
+                            Log.i("blok", object.getString("blok"));
+                            labelBlok.add(object.getString("blok"));
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -147,14 +159,67 @@ public class SpinnerActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                //super.onPostExecute(aVoid);
-                ArrayAdapter<String> blokAdapter = new ArrayAdapter<String>(SpinnerActivity.this, android.R.layout.simple_dropdown_item_1line, labelBlok);
+                super.onPostExecute(aVoid);
+                final ArrayAdapter<String> blokAdapter = new ArrayAdapter<String>(SpinnerActivity.this, android.R.layout.simple_dropdown_item_1line, labelBlok);
                 spinnerBlok.setAdapter(blokAdapter);
-                blokAdapter.notifyDataSetChanged();
+                spinnerBlok.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail Cari");
+
+                        labelRumah.clear();
+                        load_rumah(myData.getKdperum(),spinnerJalan.getSelectedItem().toString(),parent.getSelectedItem().toString());
+                        blokAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
             }
         };
 
         task.execute(kdperum,nmjalan);
+    }
+    private void load_rumah(final String kdperum, final String nmjalan, final String blok) {
+        AsyncTask<String, Void, Void> task = new AsyncTask<String, Void, Void>() {
+            @Override
+            protected Void doInBackground(String... params) {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url("http://192.168.43.192/perumahan/spin_rumah.php?kdperum="+kdperum+"&nmjalan="+nmjalan+"&blok="+blok)
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+
+                    JSONArray array = new JSONArray(response.body().string());
+
+                    for (int i=0; i<array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+
+                        if (!labelRumah.contains(object.getString("norumah"))) {
+                            Log.i("norumah", object.getString("norumah"));
+                            labelRumah.add(object.getString("norumah"));
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                ArrayAdapter<String> rumahAdapter = new ArrayAdapter<String>(SpinnerActivity.this, android.R.layout.simple_dropdown_item_1line, labelRumah);
+                spinnerRumah.setAdapter(rumahAdapter);
+            }
+        };
+
+        task.execute(kdperum,nmjalan,blok);
     }
 
     @Override
