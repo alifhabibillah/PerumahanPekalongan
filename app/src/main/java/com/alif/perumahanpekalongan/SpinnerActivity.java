@@ -144,6 +144,7 @@ public class SpinnerActivity extends AppCompatActivity {
                     for (int i=0; i<array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
 
+                        //Mengambil data dari object "blok" dan sembunyikan duplikasi data
                         if (!labelBlok.contains(object.getString("blok"))) {
                             Log.i("blok", object.getString("blok"));
                             labelBlok.add(object.getString("blok"));
@@ -214,7 +215,7 @@ public class SpinnerActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                ArrayAdapter<String> rumahAdapter = new ArrayAdapter<String>(SpinnerActivity.this, android.R.layout.simple_dropdown_item_1line, labelRumah);
+                final ArrayAdapter<String> rumahAdapter = new ArrayAdapter<String>(SpinnerActivity.this, android.R.layout.simple_dropdown_item_1line, labelRumah);
                 spinnerRumah.setAdapter(rumahAdapter);
             }
         };

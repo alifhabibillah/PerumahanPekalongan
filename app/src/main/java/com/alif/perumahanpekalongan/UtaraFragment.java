@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.alif.perumahanpekalongan.adapter.CardAdapter;
 
@@ -40,9 +41,9 @@ public class UtaraFragment extends Fragment implements CardAdapter.ClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_utara, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_perum, container, false);
         // menampilkan recyclerview yang ada pada file layout dengan id listUtara
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.list_utara);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.list_perum);
         // menset ukuran
         recyclerView.setHasFixedSize(true);
 
@@ -84,6 +85,13 @@ public class UtaraFragment extends Fragment implements CardAdapter.ClickListener
 
                 } catch (IOException e) {
                     e.printStackTrace();
+                    //Cek konektivitas ke server
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Koneksi Terputus. Silakan Cek Koneksi Internet Anda.", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

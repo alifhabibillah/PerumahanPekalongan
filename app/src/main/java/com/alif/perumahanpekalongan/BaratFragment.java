@@ -42,9 +42,9 @@ public class BaratFragment extends Fragment implements CardAdapter.ClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_barat, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_perum, container, false);
         // menampilkan recyclerview yang ada pada file layout dengan id listBarat
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.list_barat);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.list_perum);
         // menset ukuran
         recyclerView.setHasFixedSize(true);
 
@@ -86,6 +86,13 @@ public class BaratFragment extends Fragment implements CardAdapter.ClickListener
 
                 } catch (IOException e) {
                     e.printStackTrace();
+                    //Cek konektivitas ke server
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Koneksi Terputus. Silakan Cek Koneksi Internet Anda.", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
