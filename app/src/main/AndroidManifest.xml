@@ -56,18 +56,12 @@
         </activity>
         <activity
             android:name=".CariActivity"
-            android:label="Cari Perumahan"
-            android:launchMode="singleTop">
+            android:label="Cari Perumahan">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SEARCH" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name=".InfoActivity"
@@ -88,7 +82,8 @@
         </activity>
         <activity
             android:name=".DetailActivity"
-            android:label="Detail Perumahan">
+            android:label="Detail Perumahan"
+            android:theme="@style/TransparentToolbar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

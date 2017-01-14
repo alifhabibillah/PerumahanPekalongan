@@ -21,8 +21,6 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        getSupportActionBar().hide();
-
         MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail");
 
         detailFoto = (ImageView) findViewById(R.id.foto_perum);
@@ -33,6 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         detailPerum.setText(myData.getNmperum());
         detailDetail.setText(myData.getDetail());
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

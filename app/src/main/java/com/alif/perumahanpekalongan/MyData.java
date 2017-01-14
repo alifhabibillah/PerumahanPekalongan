@@ -1,6 +1,7 @@
 package com.alif.perumahanpekalongan;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Alif on 18/11/2016.
@@ -8,15 +9,17 @@ import java.io.Serializable;
 
 public class MyData implements Serializable {
 
-    private String kdperum, nmperum, kelurahan, kecamatan, detail, foto;
+    private String kdperum, nmperum, kelurahan, kecamatan, detail, foto, username, tanggal;
 
-    public MyData(String kdperum, String nmperum, String kelurahan, String kecamatan, String detail, String foto) {
+    public MyData(String kdperum, String nmperum, String kelurahan, String kecamatan, String detail, String foto, String username, String tanggal) {
         this.kdperum = kdperum;
         this.nmperum = nmperum;
         this.kelurahan = kelurahan;
         this.kecamatan = kecamatan;
         this.detail = detail;
         this.foto = foto;
+        this.username = username;
+        this.tanggal = tanggal;
     }
 
     public String getKdperum() {
@@ -65,5 +68,21 @@ public class MyData implements Serializable {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 }

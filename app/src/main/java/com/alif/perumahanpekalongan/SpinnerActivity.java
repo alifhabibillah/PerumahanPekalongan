@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -33,9 +35,9 @@ public class SpinnerActivity extends AppCompatActivity {
 
     public TextView perum_pilih;
     private Spinner spinnerJalan, spinnerBlok, spinnerRumah;
-    List<String> labelJalan = new ArrayList<String>();
-    List<String> labelBlok = new ArrayList<String>();
-    List<String> labelRumah = new ArrayList<String>();
+    private List<String> labelJalan = new ArrayList<String>();
+    private List<String> labelBlok = new ArrayList<String>();
+    private List<String> labelRumah = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class SpinnerActivity extends AppCompatActivity {
                     JSONArray array = new JSONArray(response.body().string());
 
                     for (int i=0; i<array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
+                        final JSONObject object = array.getJSONObject(i);
 
                         if (!labelJalan.contains(object.getString("nmjalan"))) {
                             Log.i("nmjalan", object.getString("nmjalan"));

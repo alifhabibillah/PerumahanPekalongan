@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -78,7 +80,8 @@ public class SelatanFragment extends Fragment implements CardAdapter.ClickListen
                         JSONObject object = array.getJSONObject(i);
 
                         MyData data = new MyData(object.getString("kdperum"), object.getString("nmperum"),
-                                object.getString("kelurahan"), object.getString("kecamatan"), object.getString("detail"), object.getString("foto"));
+                                object.getString("kelurahan"), object.getString("kecamatan"), object.getString("detail"), object.getString("foto"),
+                                object.getString("username"), object.getString("tanggal"));
 
                         dataList.add(data);
                     }
@@ -100,6 +103,12 @@ public class SelatanFragment extends Fragment implements CardAdapter.ClickListen
 
             @Override
             protected void onPostExecute(Void aVoid) {
+                Collections.sort(dataList, new Comparator<MyData>() {
+                    @Override
+                    public int compare(MyData lhs, MyData rhs) {
+                        return lhs.getNmperum().compareTo(rhs.getNmperum());
+                    }
+                });
                 adapter.notifyDataSetChanged();
             }
         };
