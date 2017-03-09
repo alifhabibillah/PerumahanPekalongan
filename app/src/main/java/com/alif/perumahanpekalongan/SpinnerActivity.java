@@ -44,23 +44,23 @@ public class SpinnerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spinner);
 
-        final MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail Cari");
+        final Bundle bundle = getIntent().getExtras();
 
         perum_pilih = (TextView) findViewById(R.id.perum_pilih);
-        perum_pilih.setText(myData.getNmperum());
+        perum_pilih.setText(bundle.getString("Nmperum"));
 
         spinnerJalan = (Spinner) findViewById(R.id.spin_jalan);
         spinnerBlok = (Spinner) findViewById(R.id.spin_blok);
         spinnerRumah = (Spinner) findViewById(R.id.spin_rumah);
 
-        load_jalan(myData.getKdperum());
+        load_jalan(bundle.getString("Kdperum"));
 
         Button btn_cari = (Button) findViewById(R.id.btn_cari);
 
         btn_cari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String kdPerum = myData.getKdperum();
+                String kdPerum = bundle.getString("Kdperum");
                 String nmJalan = spinnerJalan.getSelectedItem().toString();
                 String bLok    = spinnerBlok.getSelectedItem().toString();
                 String noRumah = spinnerRumah.getSelectedItem().toString();
@@ -82,7 +82,7 @@ public class SpinnerActivity extends AppCompatActivity {
             protected Void doInBackground(String... params) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://192.168.43.192/perumahan/spin_jalan.php?kdperum="+kdperum)
+                        .url("http://perumahan.habibillah.web.id/spin_jalan.php?kdperum="+kdperum)
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
@@ -113,10 +113,10 @@ public class SpinnerActivity extends AppCompatActivity {
                 spinnerJalan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail Cari");
+                        Bundle bundle = getIntent().getExtras();
 
                         labelBlok.clear();
-                        load_blok(myData.getKdperum(),parent.getSelectedItem().toString());
+                        load_blok(bundle.getString("Kdperum"),parent.getSelectedItem().toString());
                         jalanAdapter.notifyDataSetChanged();
                     }
 
@@ -136,7 +136,7 @@ public class SpinnerActivity extends AppCompatActivity {
             protected Void doInBackground(String... params) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://192.168.43.192/perumahan/spin_blok.php?kdperum="+kdperum+"&nmjalan="+nmjalan)
+                        .url("http://perumahan.habibillah.web.id/spin_blok.php?kdperum="+kdperum+"&nmjalan="+nmjalan)
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
@@ -168,10 +168,10 @@ public class SpinnerActivity extends AppCompatActivity {
                 spinnerBlok.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MyData myData = (MyData)getIntent().getExtras().getSerializable("Detail Cari");
+                        Bundle bundle = getIntent().getExtras();
 
                         labelRumah.clear();
-                        load_rumah(myData.getKdperum(),spinnerJalan.getSelectedItem().toString(),parent.getSelectedItem().toString());
+                        load_rumah(bundle.getString("Kdperum"),spinnerJalan.getSelectedItem().toString(),parent.getSelectedItem().toString());
                         blokAdapter.notifyDataSetChanged();
                     }
 
@@ -191,7 +191,7 @@ public class SpinnerActivity extends AppCompatActivity {
             protected Void doInBackground(String... params) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://192.168.43.192/perumahan/spin_rumah.php?kdperum="+kdperum+"&nmjalan="+nmjalan+"&blok="+blok)
+                        .url("http://perumahan.habibillah.web.id/spin_rumah.php?kdperum="+kdperum+"&nmjalan="+nmjalan+"&blok="+blok)
                         .build();
                 try {
                     Response response = client.newCall(request).execute();

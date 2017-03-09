@@ -69,7 +69,7 @@ public class BaratFragment extends Fragment implements CardAdapter.ClickListener
             protected Void doInBackground(String... params) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://192.168.43.192/perumahan/info.php?kecamatan="+kecamatan)
+                        .url("http://perumahan.habibillah.web.id/info.php?kecamatan="+kecamatan)
                         .build();
                 try {
                     Response response = client.newCall(request).execute();

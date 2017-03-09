@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="versi 1.0"
+        android:text="versi 2.0"
         android:textSize="14sp"
         android:textColor="#009688"
         android:layout_gravity="center_horizontal" />
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Alif Habibillah\nwww.habibillah.web.id\nhabibie.alief@gmail.com"
+        android:text="Alif Habibillah\nhabibillah.web.id\nhabibie.alief@gmail.com"
         android:textSize="14sp"
         android:textAlignment="center"
         android:textColor="#009688"

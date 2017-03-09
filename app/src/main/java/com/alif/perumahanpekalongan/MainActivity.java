@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        getSupportActionBar().hide();
-
         ImageButton img_btn_cari = (ImageButton) findViewById(R.id.img_btn_cari);
         ImageButton img_btn_info = (ImageButton) findViewById(R.id.img_btn_info);
         ImageButton img_btn_tentang = (ImageButton) findViewById(R.id.img_btn_tentang);
@@ -45,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(tentang_intent);
             }
         });
+
+        getSupportActionBar().hide();
     }
 
     @Override

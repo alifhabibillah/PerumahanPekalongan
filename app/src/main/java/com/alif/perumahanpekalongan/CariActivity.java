@@ -3,9 +3,12 @@ package com.alif.perumahanpekalongan;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -30,7 +33,7 @@ import okhttp3.Response;
  * Created by Alif on 12/12/2016.
  */
 
-public class CariActivity extends AppCompatActivity implements CardAdapter.ClickListener {
+public class CariActivity extends AppCompatActivity implements CardAdapter.ClickListener,SearchView.OnQueryTextListener {
 
     private CardAdapter adapter;
     private List<MyData> dataList;
@@ -62,7 +65,7 @@ public class CariActivity extends AppCompatActivity implements CardAdapter.Click
             protected Void doInBackground(Void... params) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://192.168.43.192/perumahan/cari.php")
+                        .url("http://perumahan.habibillah.web.id/cari.php")
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
@@ -110,11 +113,20 @@ public class CariActivity extends AppCompatActivity implements CardAdapter.Click
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_items,menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    @Override
     public void itemClicked(View v, int position) {
+        MyData myData = adapter.getItem(position);
         Intent intent = new Intent(this, SpinnerActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Detail Cari", dataList.get(position));
-        intent.putExtras(bundle);
+        intent.putExtra("Kdperum", myData.getKdperum());
+        intent.putExtra("Nmperum", myData.getNmperum());
         startActivity(intent);
     }
 
@@ -127,5 +139,23 @@ public class CariActivity extends AppCompatActivity implements CardAdapter.Click
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<MyData> newList = new ArrayList<>();
+        for (MyData myData : dataList) {
+            String name = myData.getNmperum().toLowerCase();
+            if (name.contains(newText))
+                newList.add(myData);
+        }
+        adapter.setFilter(newList);
+        return true;
     }
 }

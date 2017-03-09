@@ -1,6 +1,7 @@
 package com.alif.perumahanpekalongan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.alif.perumahanpekalongan.MyData;
 import com.alif.perumahanpekalongan.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,5 +73,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     public interface ClickListener {
         void itemClicked(View v, int position);
+    }
+
+    public void setFilter(ArrayList<MyData> newList) {
+        myDatas = new ArrayList<>();
+        myDatas.addAll(newList);
+        notifyDataSetChanged();
+    }
+
+    public MyData getItem(int position) {
+        return myDatas.get(position);
     }
 }
