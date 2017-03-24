@@ -113,35 +113,6 @@ public class CariActivity extends AppCompatActivity implements CardAdapter.Click
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_items,menu);
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setOnQueryTextListener(this);
-        return true;
-    }
-
-    @Override
-    public void itemClicked(View v, int position) {
-        MyData myData = adapter.getItem(position);
-        Intent intent = new Intent(this, SpinnerActivity.class);
-        intent.putExtra("Kdperum", myData.getKdperum());
-        intent.putExtra("Nmperum", myData.getNmperum());
-        startActivity(intent);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
@@ -157,5 +128,34 @@ public class CariActivity extends AppCompatActivity implements CardAdapter.Click
         }
         adapter.setFilter(newList);
         return true;
+    }
+
+    @Override
+    public void itemClicked(View v, int position) {
+        MyData myData = adapter.getItem(position);
+        Intent intent = new Intent(this, SpinnerActivity.class);
+        intent.putExtra("Kdperum", myData.getKdperum());
+        intent.putExtra("Nmperum", myData.getNmperum());
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_items,menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
